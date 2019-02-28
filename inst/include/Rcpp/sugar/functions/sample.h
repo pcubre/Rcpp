@@ -348,7 +348,7 @@ inline Vector<INTSXP> EmpiricalSample(int n, int size, bool replace, bool one_ba
         return ans;
     }
 
-    int* x = reinterpret_cast<int*>(R_alloc(n, sizeof(int)));
+    int * x = Calloc(n, int);
     for (int i = 0; i < n; i++) {
         x[i] = i;
     }
@@ -359,6 +359,7 @@ inline Vector<INTSXP> EmpiricalSample(int n, int size, bool replace, bool one_ba
         x[j] = x[--n];
     }
 
+    Free(x);
     return ans;
 }
 
@@ -378,7 +379,7 @@ inline Vector<RTYPE> EmpiricalSample(int size, bool replace, const Vector<RTYPE>
         return ans;
     }
 
-    int* x = reinterpret_cast<int*>(R_alloc(n, sizeof(int)));
+    int * x = Calloc(n, int);
     for (int i = 0; i < n; i++) {
         x[i] = i;
     }
@@ -388,7 +389,7 @@ inline Vector<RTYPE> EmpiricalSample(int size, bool replace, const Vector<RTYPE>
         *ians = ref[x[j]];
         x[j] = x[--n];
     }
-
+    Free(x);
     return ans;
 }
 
